@@ -14,6 +14,7 @@ import {
 import NavigationHeader from "@/components/navigation-header";
 import { parseMarkdownBold } from "@/lib/markdown-utils";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import puddleImage from "@assets/Puddle the Planter_1759063996813.png";
 
 interface Message {
   id: string;
@@ -26,7 +27,7 @@ export default function SmartAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      content: "Hello! I'm your **Smart Farm Assistant**. I can help you with questions about your irrigation, crops, weather, and water management. Just ask me anything about your Green Valley Farm!",
+      content: "Hi there! I'm **Puddle the Planter**, your friendly farm companion! 🌱💧 I love helping with irrigation, crops, weather, and all things water-related on your Green Valley Farm. What would you like to know today?",
       isUser: false,
       timestamp: new Date()
     }
@@ -104,13 +105,21 @@ export default function SmartAssistant() {
       <NavigationHeader farmerName="John Doe" farmerId={farmerId} />
       
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground mb-2" data-testid="text-assistant-title">
-            Smart Farm Assistant
-          </h2>
-          <p className="text-muted-foreground">
-            Ask me anything about your irrigation, crops, weather, and farm management
-          </p>
+        <div className="mb-6 flex items-center gap-4">
+          <img 
+            src={puddleImage} 
+            alt="Puddle the Planter" 
+            className="w-16 h-16 rounded-full border-2 border-primary/20"
+            data-testid="img-puddle-avatar"
+          />
+          <div>
+            <h2 className="text-2xl font-bold text-foreground mb-2" data-testid="text-assistant-title">
+              Chat with Puddle the Planter
+            </h2>
+            <p className="text-muted-foreground">
+              Your friendly farm companion for irrigation, crops, weather, and water wisdom!
+            </p>
+          </div>
         </div>
 
         <Card className="h-[600px] flex flex-col" data-testid="card-chat-interface">
@@ -125,11 +134,13 @@ export default function SmartAssistant() {
                     data-testid={`message-${message.isUser ? 'user' : 'bot'}-${message.id}`}
                   >
                     {!message.isUser && (
-                      <Avatar className="w-8 h-8">
-                        <AvatarFallback className="bg-primary text-primary-foreground">
-                          <Brain className="h-4 w-4" />
-                        </AvatarFallback>
-                      </Avatar>
+                      <div className="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+                        <img 
+                          src={puddleImage} 
+                          alt="Puddle" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     )}
                     
                     <div
@@ -177,15 +188,17 @@ export default function SmartAssistant() {
                 {/* Loading indicator */}
                 {chatMutation.isPending && (
                   <div className="flex gap-3" data-testid="loading-indicator">
-                    <Avatar className="w-8 h-8">
-                      <AvatarFallback className="bg-primary text-primary-foreground">
-                        <Brain className="h-4 w-4" />
-                      </AvatarFallback>
-                    </Avatar>
+                    <div className="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+                      <img 
+                        src={puddleImage} 
+                        alt="Puddle" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="bg-muted text-muted-foreground rounded-lg px-3 py-2">
                       <div className="flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span className="text-sm">Thinking...</span>
+                        <span className="text-sm">Puddle is thinking...</span>
                       </div>
                     </div>
                   </div>
@@ -229,10 +242,10 @@ export default function SmartAssistant() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              "Should I irrigate my corn today?",
-              "How's my water efficiency this month?",
-              "What's the weather forecast for tomorrow?",
-              "When should I water my crops next?"
+              "Hey Puddle, should I water my corn today?",
+              "Puddle, how's my water efficiency looking?",
+              "What's the weather forecast, Puddle?",
+              "When should I irrigate next, Puddle?"
             ].map((suggestion, index) => (
               <Button
                 key={index}
