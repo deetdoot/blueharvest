@@ -272,3 +272,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Blue Harvest represents the future of sustainable agriculture through intelligent water management. By combining cutting-edge AI technology with practical farming needs and regulatory requirements, we're helping build a more efficient and sustainable agricultural ecosystem.
 
 **Built with ❤️ for farmers and agricultural sustainability**
+
+Contributors:
+Roy Margallo 
+Bibhash Kar
+Shuvashish Kar
+Emtiaz Emon
