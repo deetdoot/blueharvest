@@ -153,7 +153,140 @@ blueharvest/
 
 The application will be available at `http://localhost:5000`
 
-## 📖 Usage
+## � Running Locally (Troubleshooting Guide)
+
+If you encounter issues with the standard installation, here are the **exact steps that work** for running Blue Harvest locally, especially on macOS:
+
+### **Step 1: Clean Installation**
+```bash
+# Navigate to project directory
+cd blueharvest
+
+# Remove any existing node_modules and lock files
+rm -rf node_modules package-lock.json
+
+# Install dependencies avoiding TensorFlow compilation issues
+npm install --no-optional --ignore-scripts
+
+# Install required dev dependencies
+npm install --save-dev drizzle-kit
+npm install dotenv
+```
+
+### **Step 2: Fix Environment Variables**
+Create a properly formatted `.env` file in the root directory:
+```env
+# Database (Required) - Use quotes to handle special characters
+DATABASE_URL="your_postgresql_connection_string"
+
+# Weather API (Required)
+OPENWEATHER_API_KEY=your_openweathermap_api_key
+
+# AI Service (Required)
+GEMINI_API_KEY=your_google_gemini_api_key
+
+# Email Service (Optional)
+SENDGRID_API_KEY=your_sendgrid_api_key
+FROM_EMAIL=your_sender_email@domain.com
+
+# Environment
+NODE_ENV=development
+```
+
+### **Step 3: Fix Server Configuration (macOS Fix)**
+If you encounter `ENOTSUP` socket binding errors, edit `server/index.ts`:
+
+**Add dotenv import at the top:**
+```typescript
+import dotenv from "dotenv";
+dotenv.config();
+
+import express, { type Request, Response, NextFunction } from "express";
+// ... rest of imports
+```
+
+**Fix server binding (around line 65):**
+```typescript
+// Change from complex listen options to simple binding
+const port = parseInt(process.env.PORT || '5000', 10);
+server.listen(port, "127.0.0.1", () => {
+  log(`serving on port ${port}`);
+});
+```
+
+### **Step 4: Database Setup**
+```bash
+# Push database schema to your PostgreSQL instance
+npm run db:push
+```
+
+### **Step 5: Run with Environment Variables**
+```bash
+# Export environment variables (replace with your actual values)
+export DATABASE_URL="your_database_connection_string"
+export GEMINI_API_KEY="your_gemini_api_key"
+
+# Start the development server
+npm run dev
+```
+
+### **Step 6: Access the Application**
+- **Main Application**: http://127.0.0.1:5000
+- **Farmer Dashboard**: http://127.0.0.1:5000/
+- **Government Dashboard**: http://127.0.0.1:5000/government-dashboard
+- **Smart Assistant**: http://127.0.0.1:5000/smart-assistant
+- **Farmer Registration**: http://127.0.0.1:5000/farmer-registration
+
+### **Common Issues & Solutions**
+
+#### **Issue 1: TensorFlow Build Errors**
+```
+Error: The Node.js native addon module (tfjs_binding.node) can not be found
+```
+**Solution**: Use `npm install --no-optional --ignore-scripts` to skip problematic native modules.
+
+#### **Issue 2: Socket Binding Error (ENOTSUP)**
+```
+Error: listen ENOTSUP: operation not supported on socket 0.0.0.0:5000
+```
+**Solution**: Change server binding from `0.0.0.0` to `127.0.0.1` in `server/index.ts`.
+
+#### **Issue 3: Environment Variables Not Loading**
+```
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+```
+**Solution**: 
+- Add quotes around DATABASE_URL in `.env` file
+- Import and configure dotenv in `server/index.ts`
+- Export variables manually if needed
+
+#### **Issue 4: Port Already in Use**
+```
+Error: listen EADDRINUSE: address already in use :::5000
+```
+**Solution**: 
+- Check what's using the port: `lsof -i :5000`
+- Use a different port: `export PORT=3001 && npm run dev`
+- Or stop the conflicting process
+
+### **Expected Warnings (Non-breaking)**
+These warnings are normal and don't affect functionality:
+- ⚠️ `API key does not start with "SG."` - SendGrid warning (optional feature)
+- ⚠️ `Weather API error: 401 Unauthorized` - Uses mock data without API key
+- ⚠️ `TensorFlow module not found` - Uses fallback calculations
+- ⚠️ `API Ninjas key not found` - Uses mock crop price data
+
+### **Success Indicators**
+When running successfully, you should see:
+```
+✓ [dotenv] injecting env from .env
+✓ Checking prototype data...
+✓ Prototype farmer already exists: [farmer-id]
+✓ serving on port 5000
+✓ GET /api/farmers 200 in XXXms
+```
+
+## �📖 Usage
 
 ### For Farmers
 1. **Registration**: Register your farm with location, crop types, and field information
