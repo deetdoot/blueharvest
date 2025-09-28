@@ -108,7 +108,7 @@ export default function SmartAssistant() {
         <div className="mb-6 flex items-center gap-4">
           <img 
             src={puddleImage} 
-            alt="Puddle the Planter" 
+            alt="Puddles the Planter" 
             className="w-16 h-16 rounded-full border-2 border-primary/20"
             data-testid="img-puddle-avatar"
           />
@@ -242,10 +242,10 @@ export default function SmartAssistant() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              "Hey Puddle, should I water my corn today?",
-              "Puddle, how's my water efficiency looking?",
-              "What's the weather forecast, Puddle?",
-              "When should I irrigate next, Puddle?"
+              "Hey Puddles, should I water my corn today?",
+              "Puddles, how's my water efficiency looking?",
+              "What's the weather forecast, Puddles?",
+              "When should I irrigate next, Puddles ?"
             ].map((suggestion, index) => (
               <Button
                 key={index}
