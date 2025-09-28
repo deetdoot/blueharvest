@@ -4,6 +4,17 @@
 
 A comprehensive AI-powered irrigation management platform that helps farmers optimize water usage and ensures regulatory compliance for government oversight.
 
+Live Demo: https://mlh-asu-emon8.replit.app/https://mlh-asu-emon8.replit.app/
+
+Demo Video: https://www.youtube.com/watch?v=foIdEKN_QUA
+
+<img width="1260" height="746" alt="image" src="https://github.com/user-attachments/assets/1a7ed062-8ffe-4b5d-8c76-1ae752572ada" />
+<img width="409" height="563" alt="image" src="https://github.com/user-attachments/assets/924f1625-bd57-4713-b11b-f53b9a4e236a" />
+<img width="801" height="668" alt="image" src="https://github.com/user-attachments/assets/6828fb35-d5c9-4abf-903e-23d83700aae0" />
+<img width="877" height="256" alt="image" src="https://github.com/user-attachments/assets/ab67620d-7db3-4fdf-8684-fd33ddaefaf9" />
+<img width="1258" height="675" alt="image" src="https://github.com/user-attachments/assets/9ba0577a-8dbf-4c23-9a23-c188c4f98709" />
+
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
